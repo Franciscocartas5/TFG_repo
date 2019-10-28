@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TFG_player</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css', _external=True) }}" media="screen">
+
+   </head>
+
+
+  <body>
+    <header>
+      <h1>TFG Player </h1>
+      <div id= 'contenido-archivo-p' hidden="True"> {{ p }} </div>
+      <div id= 'contenido-archivo-q' hidden="True"> {{ q }} </div>
+    </header>
+  
+  <audio src="{{ url_for('send_file', filename=filename, _external=True) }}" preload = "auto"></audio>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  
+  <div id="contenido">Time:</div>
+  <div id = "contenido_mpos" hidden="true"></div>
+
+  <script type="text/javascript">
+    
+        if (window.XMLHttpRequest)
+        {
+          // Objeto para IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp=new XMLHttpRequest();
+        }else{
+          // Objeto para IE6, IE5
+          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        
+        xmlhttp.open("GET","/uploads/MAPS_MUS-alb_esp2_AkPnCGdD.mpos",false);
+        xmlhttp.setRequestHeader('Content-Type' , 'application/xml')
+        xmlhttp.send();
+         
+        // Obtenemos un objeto XMLDocument con el contenido del archivo xml del servidor
+      
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(xmlhttp.responseText, 'application/xml');
+        document.getElementById("contenido_mpos").value = doc
+
+  </script>
+  <script src="{{ url_for('static', filename='audio.min.js', _external=True) }}" type="text/javascript">
+  </script>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='osc.min.js', _external=True) }}"></script>
+
+  <script type="text/JavaScript">
+      audiojs.events.ready(function() {
+        audiojs.createAll();
+       });
+  </script>
+
+  </body> 
+</html>
