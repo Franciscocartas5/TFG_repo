@@ -6,7 +6,7 @@ from flask import Flask, request, render_template, send_from_directory, url_for,
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
-from normal_stat import transcript
+from DNN_transcript import transcript
 from align import align
 
 UPLOAD_FOLDER = 'C:\Users\Francisco A\Google Drive (facm0002@red.ujaen.es)\ULI\TFG\FlaskApp\uploads'
